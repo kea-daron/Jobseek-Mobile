@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_my_cv_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_post_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_saved_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_service_page.dart';
@@ -140,7 +141,10 @@ class _JobSeekerDashboardPageState extends State<JobSeekerDashboardPage> {
             ),
           ),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const JobSeekerMyCvPage()),
+            ),
             style: OutlinedButton.styleFrom(
               side: const BorderSide(color: Colors.white54),
               foregroundColor: Colors.white,
@@ -507,7 +511,13 @@ class _JobSeekerDashboardPageState extends State<JobSeekerDashboardPage> {
               (i) => GestureDetector(
                 onTap: () {
                   if (i == _currentIndex) return;
-                  if (i == 1) {
+                  if (i == 0) {
+                    // Pop all the way back to Home
+                    Navigator.popUntil(
+                      context,
+                      ModalRoute.withName('/job-seeker-home'),
+                    );
+                  } else if (i == 1) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

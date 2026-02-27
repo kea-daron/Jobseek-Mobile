@@ -4,7 +4,13 @@ import 'package:jobseek/shared/themes.dart';
 class ShareButton extends StatelessWidget {
   final String label;
   final Widget link;
-  const ShareButton({super.key, required this.label, required this.link});
+  final String? routeName;
+  const ShareButton({
+    super.key,
+    required this.label,
+    required this.link,
+    this.routeName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,12 @@ class ShareButton extends StatelessWidget {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => link),
+            MaterialPageRoute(
+              settings: routeName != null
+                  ? RouteSettings(name: routeName)
+                  : null,
+              builder: (_) => link,
+            ),
           );
         },
         child: Text(label, style: TextStyle(fontSize: AppFonts.body)),

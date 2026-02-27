@@ -65,7 +65,11 @@ class _CreaetAccountState extends State<JobSeekerRegisterWithEmail> {
               const SizedBox(height: 15),
               ConfirmPassword(),
               const SizedBox(height: 60),
-              ShareButton(label: "Register", link: JobSeekerHomePage()),
+              ShareButton(
+                label: "Register",
+                link: JobSeekerHomePage(),
+                routeName: '/job-seeker-home',
+              ),
               const SizedBox(height: 50),
               OtherMethod(title: "Already have an account", icons: createIcons),
             ],

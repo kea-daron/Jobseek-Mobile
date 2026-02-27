@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_edit_post_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class JobSeekerPostPage extends StatefulWidget {
@@ -125,7 +126,21 @@ class _JobSeekerPostPageState extends State<JobSeekerPostPage> {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => JobSeekerEditPostPage(
+                    name: post.name,
+                    role: post.role,
+                    bio: post.bio,
+                    position: post.position,
+                    salary: post.salary,
+                    jobType: post.jobType,
+                    skills: List<String>.from(post.skills),
+                    links: {for (final l in post.links) l.icon: l.label},
+                  ),
+                ),
+              ),
               style: TextButton.styleFrom(
                 minimumSize: Size.zero,
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),

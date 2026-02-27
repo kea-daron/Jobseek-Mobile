@@ -67,7 +67,11 @@ class _JobSeekerRegisterWithPhoneNumberState
               const SizedBox(height: 10),
               ConfirmPassword(),
               const SizedBox(height: 40),
-              ShareButton(label: "Register", link: JobSeekerHomePage()),
+              ShareButton(
+                label: "Register",
+                link: JobSeekerHomePage(),
+                routeName: '/job-seeker-home',
+              ),
               const SizedBox(height: 50),
               OtherMethod(title: "Already have an account", icons: createIcons),
             ],

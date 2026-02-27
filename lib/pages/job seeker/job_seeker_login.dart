@@ -50,7 +50,11 @@ class _JobSeekerLoginState extends State<JobSeekerLogin> {
                 ),
               ),
               const SizedBox(height: 40),
-              ShareButton(label: "Login", link: JobSeekerHomePage()),
+              ShareButton(
+                label: "Login",
+                link: JobSeekerHomePage(),
+                routeName: '/job-seeker-home',
+              ),
               const SizedBox(height: 30),
               OtherMethod(title: "Other login method", icons: loginIcons),
               const SizedBox(height: 100),
