@@ -5,6 +5,9 @@ import 'package:jobseek/pages/job%20seeker/job_seeker_create_post_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_discover_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_job_detail_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_profile_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_dashboard_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_saved_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_service_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class JobSeekerHomePage extends StatefulWidget {
@@ -102,9 +105,7 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (_) => const JobSeekerProfilePage(),
-              ),
+              MaterialPageRoute(builder: (_) => const JobSeekerProfilePage()),
             ),
             child: CircleAvatar(
               radius: 24,
@@ -115,9 +116,7 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
           GestureDetector(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (_) => const JobSeekerProfilePage(),
-              ),
+              MaterialPageRoute(builder: (_) => const JobSeekerProfilePage()),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -675,7 +674,32 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
             children: List.generate(
               items.length,
               (i) => GestureDetector(
-                onTap: () => setState(() => _currentIndex = i),
+                onTap: () {
+                  if (i == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const JobSeekerServicePage(),
+                      ),
+                    );
+                  } else if (i == 2) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const JobSeekerSavedPage(),
+                      ),
+                    );
+                  } else if (i == 3) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const JobSeekerDashboardPage(),
+                      ),
+                    );
+                  } else {
+                    setState(() => _currentIndex = i);
+                  }
+                },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
