@@ -30,7 +30,7 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
       'jobTitle': TextEditingController(),
       'location': TextEditingController(),
       'description': TextEditingController(),
-    }
+    },
   ];
 
   final List<Map<String, TextEditingController>> _educationEntries = [
@@ -41,7 +41,7 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
       'subject': TextEditingController(),
       'degree': TextEditingController(),
       'description': TextEditingController(),
-    }
+    },
   ];
 
   // Other Information
@@ -316,7 +316,10 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (index > 0) ...[const Divider(height: 32), const SizedBox(height: 4)],
+        if (index > 0) ...[
+          const Divider(height: 32),
+          const SizedBox(height: 4),
+        ],
         _fieldLabel('Employer'),
         const SizedBox(height: 6),
         _textField(controller: entry['employer']!, hint: 'ABA'),
@@ -459,7 +462,10 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
           ),
         ),
         const SizedBox(height: 24),
-        ...List.generate(_educationEntries.length, (i) => _buildEducationEntry(i)),
+        ...List.generate(
+          _educationEntries.length,
+          (i) => _buildEducationEntry(i),
+        ),
         const SizedBox(height: 8),
         GestureDetector(
           onTap: () {
@@ -507,7 +513,10 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (index > 0) ...[const Divider(height: 32), const SizedBox(height: 4)],
+        if (index > 0) ...[
+          const Divider(height: 32),
+          const SizedBox(height: 4),
+        ],
         _fieldLabel('School'),
         const SizedBox(height: 6),
         _textField(controller: entry['school']!, hint: 'RUPP'),
@@ -560,8 +569,18 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
 
   String _monthName(int month) {
     const names = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return names[month - 1];
   }
@@ -763,42 +782,42 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
               ),
               const SizedBox(height: 10),
               // Divider-like line
-              Container(
-                height: 1,
-                color: const Color(0xFFBFC3D2),
-              ),
+              Container(height: 1, color: const Color(0xFFBFC3D2)),
               const SizedBox(height: 8),
               // Content lines
-              ...List.generate(5, (j) => Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Container(
-                  height: 5,
-                  width: j.isEven ? double.infinity : 100,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFD0D3E0),
-                    borderRadius: BorderRadius.circular(4),
+              ...List.generate(
+                5,
+                (j) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 5,
+                    width: j.isEven ? double.infinity : 100,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD0D3E0),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
                 ),
-              )),
-              const SizedBox(height: 6),
-              Container(
-                height: 1,
-                color: const Color(0xFFBFC3D2),
               ),
+              const SizedBox(height: 6),
+              Container(height: 1, color: const Color(0xFFBFC3D2)),
               const SizedBox(height: 8),
-              ...List.generate(4, (j) => Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Container(
-                  height: 5,
-                  width: j == 0 ? 60 : double.infinity,
-                  decoration: BoxDecoration(
-                    color: index < 2
-                        ? const Color(0xFFD0D3E0)
-                        : AppColors.primary.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(4),
+              ...List.generate(
+                4,
+                (j) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 5,
+                    width: j == 0 ? 60 : double.infinity,
+                    decoration: BoxDecoration(
+                      color: index < 2
+                          ? const Color(0xFFD0D3E0)
+                          : AppColors.primary.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
                 ),
-              )),
+              ),
             ],
           ),
         ),
@@ -830,11 +849,7 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
                   color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 17,
-                ),
+                child: const Icon(Icons.check, color: Colors.white, size: 17),
               ),
             ),
           ),
@@ -964,9 +979,9 @@ class _JobSeekerCvFormPageState extends State<JobSeekerCvFormPage> {
               setState(() => _currentStep++);
             } else {
               // TODO: save / download CV
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('CV saved!')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('CV saved!')));
             }
           },
           child: Row(

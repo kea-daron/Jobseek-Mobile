@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_cv_form_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_home_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_upload_cv_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
@@ -227,7 +228,13 @@ class _JobSeekerCreateCvPageState extends State<JobSeekerCreateCvPage> {
               (i) => GestureDetector(
                 onTap: () {
                   if (i == 0) {
-                    Navigator.pop(context);
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const JobSeekerHomePage(),
+                      ),
+                      (route) => false,
+                    );
                   } else {
                     setState(() => _currentIndex = i);
                   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_home_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class JobSeekerApplyPage extends StatefulWidget {
@@ -285,7 +286,19 @@ class _JobSeekerApplyPageState extends State<JobSeekerApplyPage> {
             children: List.generate(
               items.length,
               (i) => GestureDetector(
-                onTap: () => setState(() => _currentIndex = i),
+                onTap: () {
+                  if (i == 0) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const JobSeekerHomePage(),
+                      ),
+                      (route) => false,
+                    );
+                  } else {
+                    setState(() => _currentIndex = i);
+                  }
+                },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

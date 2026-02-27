@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_contact_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_create_cv_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_create_post_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_discover_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_job_detail_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_profile_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class JobSeekerHomePage extends StatefulWidget {
@@ -95,35 +99,62 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 24,
-            backgroundImage: const AssetImage('assets/images/meyling.jpg'),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const JobSeekerProfilePage(),
+              ),
+            ),
+            child: CircleAvatar(
+              radius: 24,
+              backgroundImage: const AssetImage('assets/images/meyling.jpg'),
+            ),
           ),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Row(
-                children: [
-                  Text(
-                    'Welcome ',
-                    style: TextStyle(fontSize: 13, color: Colors.black54),
-                  ),
-                  Text('👋', style: TextStyle(fontSize: 13)),
-                ],
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const JobSeekerProfilePage(),
               ),
-              Text(
-                'Meyling Chhun',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.primary,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Row(
+                  children: [
+                    Text(
+                      'Welcome ',
+                      style: TextStyle(fontSize: 13, color: Colors.black54),
+                    ),
+                    Text('👋', style: TextStyle(fontSize: 13)),
+                  ],
                 ),
-              ),
-            ],
+                Text(
+                  'Meyling Chhun',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ],
+            ),
           ),
           const Spacer(),
-          _buildHeaderAction('assets/icons/note.png', 'Create New post'),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const JobSeekerCreatePostPage(),
+              ),
+            ),
+            child: _buildHeaderAction(
+              'assets/icons/note.png',
+              'Create New post',
+            ),
+          ),
           const SizedBox(width: 16),
           _buildHeaderAction(
             '',
@@ -259,7 +290,10 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
       _FeatureCard(
         icon: 'assets/icons/call.png',
         label: 'Contact Us',
-        onTap: () {},
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const JobSeekerContactPage()),
+        ),
       ),
     ];
 
@@ -443,7 +477,18 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
                 style: const TextStyle(fontSize: 11, color: Colors.grey),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => JobDetailPage(
+                      title: job.title,
+                      company: job.logo ?? job.title,
+                      isApple: false,
+                      logoColor: job.logoColor,
+                      logoText: job.logo ?? '',
+                    ),
+                  ),
+                ),
                 child: const Text(
                   'View Details',
                   style: TextStyle(
