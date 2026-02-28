@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_contact_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_search_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_create_cv_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_create_post_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_discover_page.dart';
@@ -218,38 +219,61 @@ class _JobSeekerHomePageState extends State<JobSeekerHomePage>
                   ),
                 ),
                 const SizedBox(height: 14),
-                Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const JobSeekerSearchPage(),
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 12),
-                      const Icon(Icons.search, color: Colors.black38, size: 20),
-                      const SizedBox(width: 6),
-                      const Expanded(
-                        child: Text(
-                          'Search Job or Company',
-                          style: TextStyle(color: Colors.black38, fontSize: 12),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 12),
+                        const Icon(
+                          Icons.search,
+                          color: Colors.black38,
+                          size: 20,
                         ),
-                      ),
-                      Container(
-                        width: 36,
-                        height: 36,
-                        margin: const EdgeInsets.only(right: 2),
-                        decoration: BoxDecoration(
-                          color: AppColors.secondary,
-                          borderRadius: BorderRadius.circular(30),
+                        const SizedBox(width: 6),
+                        const Expanded(
+                          child: Text(
+                            'Search Job or Company',
+                            style: TextStyle(
+                              color: Colors.black38,
+                              fontSize: 12,
+                            ),
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.tune,
-                          color: Colors.white,
-                          size: 18,
+                        GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const JobSeekerSearchPage(),
+                            ),
+                          ),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            margin: const EdgeInsets.only(right: 2),
+                            decoration: BoxDecoration(
+                              color: AppColors.secondary,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: const Icon(
+                              Icons.tune,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
