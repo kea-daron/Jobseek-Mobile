@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobseek/pages/business%20owner/business_owner_home_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_login.dart';
 import 'package:jobseek/pages/business%20owner/business_owner_register_with_phone_number.dart';
 import 'package:jobseek/shared/auth/auth_inputs.dart';
 import 'package:jobseek/shared/auth/button.dart';
@@ -55,7 +55,7 @@ class BusinessOwnerRegisterWithEmail extends StatelessWidget {
               SizedBox(height: 15),
               ConfirmPassword(),
               SizedBox(height: 40),
-              ShareButton(label: "Register", link: BusinessOwnerHomePage()),
+              ShareButton(label: "Register", link: BusinessOwnerLogin()),
             ],
           ),
         ),

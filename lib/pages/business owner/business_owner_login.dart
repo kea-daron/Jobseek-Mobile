@@ -3,6 +3,7 @@ import 'package:jobseek/pages/business%20owner/business_owner_register_with_phon
 import 'package:jobseek/pages/business%20owner/business_owner_home_page.dart';
 import 'package:jobseek/shared/auth/auth_inputs.dart';
 import 'package:jobseek/shared/auth/button.dart';
+import 'package:jobseek/shared/auth/forgot_password_page.dart';
 import 'package:jobseek/shared/auth/logo_auth.dart';
 import 'package:jobseek/shared/auth/other_method.dart';
 import 'package:jobseek/shared/themes.dart';
@@ -36,7 +37,13 @@ class BusinessOwnerLogin extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          ForgotPasswordPage(loginPage: BusinessOwnerLogin()),
+                    ),
+                  ),
                   child: Text(
                     "Forgot password?",
                     style: TextStyle(fontSize: AppFonts.body),

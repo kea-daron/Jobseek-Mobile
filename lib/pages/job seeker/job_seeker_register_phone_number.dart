@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobseek/pages/job%20seeker/job_seeker_home_page.dart';
+import 'package:jobseek/pages/job%20seeker/job_seeker_login.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_register_with_email.dart';
 import 'package:jobseek/shared/auth/auth_inputs.dart';
 import 'package:jobseek/shared/auth/button.dart';
@@ -67,11 +67,7 @@ class _JobSeekerRegisterWithPhoneNumberState
               const SizedBox(height: 10),
               ConfirmPassword(),
               const SizedBox(height: 40),
-              ShareButton(
-                label: "Register",
-                link: JobSeekerHomePage(),
-                routeName: '/job-seeker-home',
-              ),
+              ShareButton(label: "Register", link: JobSeekerLogin()),
               const SizedBox(height: 50),
               OtherMethod(title: "Already have an account", icons: createIcons),
             ],
