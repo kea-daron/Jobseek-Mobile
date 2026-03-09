@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_create_job_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_dashboard_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_discover_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_profile_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_interview_detail_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_interview_page.dart';
+import 'package:jobseek/pages/business%20owner/business_owner_service_page.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class BusinessOwnerHomePage extends StatefulWidget {
@@ -38,6 +45,7 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
         ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: AppColors.primary,
@@ -49,29 +57,43 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
   Widget _buildHeader() {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 26,
-          backgroundImage: AssetImage('assets/images/meyling.jpg'),
-          backgroundColor: Colors.grey[300],
+        GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const BusinessOwnerProfilePage()),
+          ),
+          child: CircleAvatar(
+            radius: 26,
+            backgroundImage: AssetImage('assets/images/meyling.jpg'),
+            backgroundColor: Colors.grey[300],
+          ),
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Welcome 👋",
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+          child: GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BusinessOwnerProfilePage(),
               ),
-              const Text(
-                "Meyling Chhun",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome 👋",
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
-              ),
-            ],
+                const Text(
+                  "Meyling Chhun",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Container(
@@ -163,7 +185,12 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BusinessOwnerCreateJobPage(),
+              ),
+            ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.secondary,
               foregroundColor: Colors.black,
@@ -214,7 +241,15 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildCandidateCard("📋", "Discover"),
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const BusinessOwnerDiscoverPage(),
+                  ),
+                ),
+                child: _buildCandidateCard("📋", "Discover"),
+              ),
               Container(width: 1, height: 60, color: Colors.white30),
               _buildCandidateCard("📝", "Shortlist"),
               Container(width: 1, height: 60, color: Colors.white30),
@@ -412,6 +447,7 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
         ),
         const SizedBox(height: 15),
         _buildInterviewCard(
+          context: context,
           name: "Kea Chanthorn",
           position: "UX UI Designer",
           color: Colors.teal,
@@ -419,6 +455,7 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
         ),
         const SizedBox(height: 12),
         _buildInterviewCard(
+          context: context,
           name: "Kea Daron",
           position: "FullStack Web Developmnt",
           color: Colors.blue,
@@ -429,6 +466,7 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
   }
 
   Widget _buildInterviewCard({
+    required BuildContext context,
     required String name,
     required String position,
     required Color color,
@@ -517,7 +555,16 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BusinessOwnerInterviewDetailPage(
+                      candidateName: name,
+                      candidateRole: position,
+                      candidateImage: image ?? '',
+                    ),
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.secondary,
                   foregroundColor: Colors.black,
@@ -556,9 +603,33 @@ class _BusinessOwnerHomePageState extends State<BusinessOwnerHomePage> {
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          if (index == 1) {
+            setState(() => _selectedIndex = 1);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BusinessOwnerServicePage(),
+              ),
+            ).then((_) => setState(() => _selectedIndex = 0));
+          } else if (index == 2) {
+            setState(() => _selectedIndex = 2);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BusinessOwnerInterviewPage(),
+              ),
+            ).then((_) => setState(() => _selectedIndex = 0));
+          } else if (index == 3) {
+            setState(() => _selectedIndex = 3);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const BusinessOwnerDashboardPage(),
+              ),
+            ).then((_) => setState(() => _selectedIndex = 0));
+          } else {
+            setState(() => _selectedIndex = index);
+          }
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.secondary,
