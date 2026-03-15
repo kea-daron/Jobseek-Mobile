@@ -3,6 +3,7 @@ import 'package:jobseek/pages/business%20owner/business_owner_create_job_page.da
 import 'package:jobseek/pages/business%20owner/business_owner_discover_page.dart';
 import 'package:jobseek/pages/business%20owner/business_owner_edit_profile_page.dart';
 import 'package:jobseek/pages/business%20owner/business_owner_login.dart';
+import 'package:jobseek/shared/auth/auth_api_service.dart';
 import 'package:jobseek/shared/themes.dart';
 
 // ── Data Models ──────────────────────────────────────────────────────────────
@@ -157,7 +158,12 @@ class _BusinessOwnerProfilePageState extends State<BusinessOwnerProfilePage> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              Navigator.pop(context);
+                              try {
+                                await const AuthApiService().logout();
+                              } catch (_) {}
+                              if (!context.mounted) return;
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(

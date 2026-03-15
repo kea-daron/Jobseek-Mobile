@@ -5,11 +5,13 @@ class ShareButton extends StatelessWidget {
   final String label;
   final Widget link;
   final String? routeName;
+  final VoidCallback? onPressed;
   const ShareButton({
     super.key,
     required this.label,
     required this.link,
     this.routeName,
+    this.onPressed,
   });
 
   @override
@@ -25,17 +27,19 @@ class ShareButton extends StatelessWidget {
             borderRadius: BorderRadiusGeometry.circular(10),
           ),
         ),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              settings: routeName != null
-                  ? RouteSettings(name: routeName)
-                  : null,
-              builder: (_) => link,
-            ),
-          );
-        },
+        onPressed:
+            onPressed ??
+            () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  settings: routeName != null
+                      ? RouteSettings(name: routeName)
+                      : null,
+                  builder: (_) => link,
+                ),
+              );
+            },
         child: Text(label, style: TextStyle(fontSize: AppFonts.body)),
       ),
     );

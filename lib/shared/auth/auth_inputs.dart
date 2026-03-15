@@ -5,11 +5,13 @@ final Color inputFormBgColor = const Color(0xFFE3E3E3);
 
 // Input phonenumber
 class InputPhoneNumber extends StatelessWidget {
-  const InputPhoneNumber({super.key});
+  final TextEditingController? controller;
+  const InputPhoneNumber({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: TextInputType.phone,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       decoration: InputDecoration(
@@ -30,40 +32,61 @@ class InputPhoneNumber extends StatelessWidget {
 
 // Input name
 class InputName extends StatelessWidget {
-  const InputName({super.key});
+  final TextEditingController? controller;
+  const InputName({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: "Full name",
         fillColor: inputFormBgColor,
         filled: true,
         border: InputBorder.none,
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return "Full name is required";
+        }
+        return null;
+      },
     );
   }
 }
 
 class InputEmail extends StatelessWidget {
-  const InputEmail({super.key});
+  final TextEditingController? controller;
+  const InputEmail({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: "Email",
         fillColor: inputFormBgColor,
         filled: true,
         border: InputBorder.none,
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return "Email is required";
+        }
+        if (!value.contains('@')) {
+          return "Please enter a valid email";
+        }
+        return null;
+      },
     );
   }
 }
 
 // Input password
 class InputPassword extends StatefulWidget {
-  const InputPassword({super.key});
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  const InputPassword({super.key, this.controller, this.validator});
 
   @override
   State<InputPassword> createState() => _InputPasswordState();
@@ -76,6 +99,7 @@ class _InputPasswordState extends State<InputPassword> {
     return Column(
       children: [
         TextFormField(
+          controller: widget.controller,
           obscureText: _obscurePassword,
           decoration: InputDecoration(
             hintText: "Password",
@@ -93,12 +117,17 @@ class _InputPasswordState extends State<InputPassword> {
               },
             ),
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Password is required";
-            }
-            return null;
-          },
+          validator:
+              widget.validator ??
+              (value) {
+                if (value == null || value.isEmpty) {
+                  return "Password is required";
+                }
+                if (value.length < 6) {
+                  return "Password must be at least 6 characters";
+                }
+                return null;
+              },
         ),
       ],
     );
@@ -107,7 +136,9 @@ class _InputPasswordState extends State<InputPassword> {
 
 // Confirm password
 class ConfirmPassword extends StatefulWidget {
-  const ConfirmPassword({super.key});
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  const ConfirmPassword({super.key, this.controller, this.validator});
 
   @override
   State<ConfirmPassword> createState() => _ConfirmPasswordState();
@@ -120,6 +151,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
     return Column(
       children: [
         TextFormField(
+          controller: widget.controller,
           obscureText: _obscurePassword,
           decoration: InputDecoration(
             hintText: "Confirm password",
@@ -137,30 +169,40 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
               },
             ),
           ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Password is required";
-            }
-            return null;
-          },
+          validator:
+              widget.validator ??
+              (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please confirm password";
+                }
+                return null;
+              },
         ),
       ],
     );
   }
 }
 
-class InputCompanyName extends StatelessWidget {
-  const InputCompanyName({super.key});
+class InputRole extends StatelessWidget {
+  final TextEditingController? controller;
+  const InputRole({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
-        hintText: "Company name",
+        hintText: "Role",
         fillColor: inputFormBgColor,
         filled: true,
         border: InputBorder.none,
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return "Role is required";
+        }
+        return null;
+      },
     );
   }
 }

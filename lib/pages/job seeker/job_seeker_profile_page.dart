@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobseek/pages/choose_role_page.dart'; // ChooseRole
 import 'package:jobseek/pages/job%20seeker/job_seeker_edit_profile_page.dart';
 import 'package:jobseek/pages/job%20seeker/job_seeker_home_page.dart';
+import 'package:jobseek/shared/auth/auth_api_service.dart';
 import 'package:jobseek/shared/themes.dart';
 
 class JobSeekerProfilePage extends StatefulWidget {
@@ -169,11 +170,17 @@ class _JobSeekerProfilePageState extends State<JobSeekerProfilePage>
                       Icons.logout_rounded,
                       AppColors.secondary.withOpacity(0.25),
                       AppColors.secondary,
-                      () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => const ChooseRole()),
-                        (route) => false,
-                      ),
+                      () async {
+                        try {
+                          await const AuthApiService().logout();
+                        } catch (_) {}
+                        if (!context.mounted) return;
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => const ChooseRole()),
+                          (route) => false,
+                        );
+                      },
                     ),
                   ],
                 ),
