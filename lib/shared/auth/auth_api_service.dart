@@ -41,6 +41,12 @@ class LoginRequest {
   }
 }
 
+class LoginResult {
+  final String role;
+
+  const LoginResult({required this.role});
+}
+
 class AuthApiService {
   const AuthApiService();
 
@@ -73,7 +79,7 @@ class AuthApiService {
     );
   }
 
-  Future<void> login(LoginRequest request) async {
+  Future<LoginResult> login(LoginRequest request) async {
     final uri = Uri.parse('$_baseUrl/api/v1/auth/login');
 
     final response = await http.post(
@@ -85,12 +91,27 @@ class AuthApiService {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       try {
         final dynamic decoded = jsonDecode(response.body);
-        if (decoded is Map<String, dynamic> &&
-            decoded['refreshToken'] is String) {
-          await AuthStorage.saveRefreshToken(decoded['refreshToken'] as String);
+        if (decoded is Map<String, dynamic>) {
+          if (decoded['refreshToken'] is String) {
+            await AuthStorage.saveRefreshToken(
+              decoded['refreshToken'] as String,
+            );
+          }
+
+          final String? role = _extractRole(decoded);
+          if (role == null || role.isEmpty) {
+            throw Exception(
+              'Login succeeded but user role was not returned by API.',
+            );
+          }
+
+          return LoginResult(role: role.toUpperCase());
         }
+      } on Exception {
+        rethrow;
       } catch (_) {}
-      return;
+
+      throw Exception('Login succeeded but response format is invalid.');
     }
 
     throw Exception(
@@ -128,5 +149,23 @@ class AuthApiService {
     }
 
     return message;
+  }
+
+  String? _extractRole(Map<String, dynamic> data) {
+    if (data['role'] is String) {
+      return data['role'] as String;
+    }
+
+    final dynamic user = data['user'];
+    if (user is Map<String, dynamic> && user['role'] is String) {
+      return user['role'] as String;
+    }
+
+    final dynamic payload = data['data'];
+    if (payload is Map<String, dynamic> && payload['role'] is String) {
+      return payload['role'] as String;
+    }
+
+    return null;
   }
 }

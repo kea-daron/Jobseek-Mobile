@@ -52,7 +52,7 @@ class _CreaetAccountState extends State<JobSeekerRegisterWithEmail> {
           email: _emailController.text.trim(),
           password: _passwordController.text,
           phoneNumber: _phoneNumberController.text.trim(),
-          role: 'JOB_SEEKER',
+          role: 'USER',
         ),
       );
 

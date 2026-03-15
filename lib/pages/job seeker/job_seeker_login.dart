@@ -47,12 +47,18 @@ class _JobSeekerLoginState extends State<JobSeekerLogin> {
     });
 
     try {
-      await _authApiService.login(
+      final loginResult = await _authApiService.login(
         LoginRequest(
           email: _emailController.text.trim(),
           password: _passwordController.text,
         ),
       );
+
+      if (loginResult.role != 'USER') {
+        throw Exception(
+          'This account is not a Job Seeker account. Please use Business Owner login.',
+        );
+      }
 
       if (!mounted) {
         return;
